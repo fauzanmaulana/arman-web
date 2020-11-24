@@ -1,0 +1,12 @@
+html {
+  scroll-behavior: smooth;
+}
+
+span ul li {
+  border: grey 1px solid;
+  padding: 4px;
+  margin: 5px;
+  border-radius: 10px;
+  color: grey;
+  text-align: center;
+}
