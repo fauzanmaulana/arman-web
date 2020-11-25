@@ -4,7 +4,7 @@ import React from 'react'
 import playstore from '../../image/playstore.png'
 
 // component
-import Jumbotron from './Jumbotron'
+import Jumbotron from './Jumbotron/index'
 import Explore from './Explore'
 
 function Home() {

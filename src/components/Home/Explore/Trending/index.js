@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Item from './Item'
+import DummyTrendingData from '../../../../data/Dummy/index'
 
-function Trending(props) {
+function Trending() {
+
+    const [trending, setTrending] = useState([])
+    
+    useEffect(() => {
+        setTrending(DummyTrendingData)
+    }, [])
 
     return (
         <section>
@@ -13,9 +20,7 @@ function Trending(props) {
                 </nav>
                 <div className="row">
                     {/* trending data */}
-                    {props.news.map((data, i) => (
-                        <Item data={data} key={i} />
-                    ))}
+                    <Item data={trending}/>
                 </div>
             </div>
             <hr/>

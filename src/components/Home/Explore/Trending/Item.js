@@ -1,22 +1,26 @@
 import React from 'react'
 import Source from '../../../Common/Source'
 
-function Item({data, i}) {
+function Item({data}) {
     return (
-        <div className="col-lg-4 mb-4" key={i}>
-            <div className="p-3" id="trending-card">
-                {/* profile image and from */}
-                <Source data={data}/>
+        <>
+            {data.map((item, i) => (
+                <div className="col-lg-4">
+                    <div className="p-3" id="trending-card" key={i}>
+                        {/* profile image and from */}
+                        <Source data={item}/>
 
-                {/* title */}
-                <p>{data.title}</p>
+                        {/* title */}
+                        <p>{item.title}</p>
 
-                {/* timestamp */}
-                <div className="footer-trending-card">
-                    <p className="mb-0"><span>{data.writed_at}</span> . 3 min read</p>
+                        {/* timestamp */}
+                        <div className="footer-trending-card">
+                            <p className="mb-0"><span>{item.writed_at}</span> . 3 min read</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            ))}
+        </>
     )
 }
 

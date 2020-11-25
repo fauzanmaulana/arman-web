@@ -44,26 +44,37 @@ nav h5{
 }
 
 .sidelist{
-    top: 9em;
+    top: 8.5em;
     z-index: 0;
     background: rgb(243, 243, 243);
     width: 100%;
-    height: 72vh;
+    height: auto;
     border-radius: 8px;
     padding: 20px;
     box-sizing: border-box;
 }
 
-.sidelist .list-content{
-    height: 73%;
-}
-
-.sidelist .footer-box h6 span{
-    color: #3673C3;
+.sidelist .footer-box h6{
+    color: #484848;
 }
 
 .sidelist .footer-box h6:hover{
     cursor: pointer;
+    color: #00D363;
+    transition: 0.3s;
+}
+
+#header-box h6{
+    margin-top: 2.5px;
+    color: #484848;
+}
+
+#header-box h5 span{
     color: #3673C3;
+}
+
+#header-box h6:hover{
+    cursor: pointer;
+    color: #00D363;
     transition: 0.3s;
 }

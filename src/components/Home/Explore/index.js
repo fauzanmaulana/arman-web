@@ -1,21 +1,18 @@
-import React, {useEffect, useState} from 'react'
-import DummyNewsData from '../../../data/News'
+import React, {useContext} from 'react'
+import { BookmarkContext } from '../../../context/BookmarkContext'
 import Trending from './Trending/index'
-import Today from './Today'
+import Article from './Article'
 import './style.css'
 
 function Explore() {
 
-    const [news, setNews] = useState([])
-
-    useEffect(() => {
-        setNews(DummyNewsData)
-    }, [])
+    // const { bookmark } = useContext(BookmarkContext) // if more object
+    const bookmark = useContext(BookmarkContext)
 
     return (
         <div>
-            <Trending news={news} />
-            <Today news={news} />
+            <Trending />
+            <Article bookmark={bookmark} />
         </div>
     )
 }
