@@ -2714,8 +2714,8 @@ fieldset:disabled a.btn {
 
 .btn-success {
     color: #fff;
-    background-color: #28a745;
-    border-color: #28a745
+    background-color: #00D363;
+    border-color: #00D363
 }
 
 .btn-success:hover {
@@ -3017,16 +3017,16 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-success {
-    color: #28a745;
+    color: #ffeeba;
     background-color: transparent;
     background-image: none;
-    border-color: #28a745
+    border-color: #ffeeba
 }
 
 .btn-outline-success:hover {
     color: #fff;
-    background-color: #28a745;
-    border-color: #28a745
+    background-color: #00D363;
+    border-color: #00D363
 }
 
 .btn-outline-success.focus,

@@ -14,10 +14,11 @@ import Bookmark from './components/Bookmark'
 import Like from './components/Like'
 import History from './components/History'
 import About from './components/About'
+import Source from './components/Source'
+import Search from './components/Search'
 
 // component
 import HeaderOne from './components/Common/Header/HeaderOne'
-
 import Footer from './components/Common/Footer'
 
 function App() {
@@ -40,6 +41,12 @@ function App() {
             </Route>
             <Route path="/history">
               <History />
+            </Route>
+            <Route path="/source/:id">
+              <Source />
+            </Route>
+            <Route path="/search/:keyword">
+              <Search />
             </Route>
           </Switch>
         <Footer playstore={playstore} logo={logo} />

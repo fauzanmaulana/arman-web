@@ -4,12 +4,10 @@ import List from './List'
 
 function BookmarkSide({item}) {
 
-    const bookmarks = item.splice(0, 3)
-
     return (
         <div className="wow fadeIn">
             <div className="list-content">
-                <List item={bookmarks} />
+                <List item={item} />
             </div>
 
             <div className="footer-box">

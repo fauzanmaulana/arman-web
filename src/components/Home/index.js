@@ -1,19 +1,17 @@
 import React from 'react'
-
-// image
-import playstore from '../../image/playstore.png'
+import { withRouter } from 'react-router-dom'
 
 // component
 import Jumbotron from './Jumbotron/index'
 import Explore from './Explore'
 
-function Home() {
+function Home(props) {
     return (
         <>
-            <Jumbotron playstore={playstore} />
+            <Jumbotron {...props} />
             <Explore />
         </>
     )
 }
 
-export default Home
+export default withRouter(Home)

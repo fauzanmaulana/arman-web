@@ -27,6 +27,11 @@ if(menu.length){
 		openedSymbol:'-'
 	});
 };
+
+// $('#staticBackdrop').on('show.bs.modal', function (e) {
+//     $('.modal-backdrop').css("display", "none");
+// })
+
 // blog-menu
   // $('ul#blog-menu').slicknav({
   //   prependTo: ".blog_menu"

@@ -5,7 +5,7 @@ function Item({data}) {
     return (
         <>
             {data.map((item, i) => (
-                <div className="col-lg-4">
+                <div className="col-lg-4" key={i}>
                     <div className="p-3" id="trending-card" key={i}>
                         {/* profile image and from */}
                         <Source data={item}/>
