@@ -38,11 +38,10 @@ function Header({logo}) {
 
     const authStateChange = async () => {
         await firebase.auth().onAuthStateChanged(user => {
-            console.log(user)
             setCurrentUser(user)
             if(user){
+                user.getIdToken(true).then(idToken => console.log(idToken))
                 setToken(true)
-                sessionStorage.setItem('creadentialToken', user.refreshToken)
             }
         })
     }
