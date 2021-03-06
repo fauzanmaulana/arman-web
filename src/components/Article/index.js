@@ -22,6 +22,7 @@ function Article(props) {
         origin_url: '',
         content_date: ''
     })
+    const [liked, setLiked] = useState(false)
 
     const getDetailContent = async (id) => {
         const response = await fetch(`${window.baseUrl}/api/contents/${id}`,{
@@ -32,10 +33,55 @@ function Article(props) {
         const result = await response.json()
         console.log(result)
         setArticles(result.data)
+        setLiked(result.data.liked)
+    }
+
+    const likeUnlikeArticle = async (id, bool) => {
+        switch (id) {
+            case 'like-btn':
+                if(bool){
+                    setLiked(bool)
+                    const response = await fetch(`${window.baseUrl}/api/contents/${props.match.params.id}/like`, {
+                        method: 'post',
+                        headers: new Headers({
+                            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                        })
+                    })
+                    const result = await response.json()
+                    console.log(result)
+                }else{
+                    setLiked(bool)
+                    const response = await fetch(`${window.baseUrl}/api/contents/${props.match.params.id}/unlike`, {
+                        method: 'post',
+                        headers: new Headers({
+                            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                        })
+                    })
+                    const result = await response.json()
+                    console.log(result)
+                }
+                break;
+        
+            case 'bookmark-btn':
+                console.log('bookmark code!')
+                break;
+        }
     }
 
     useEffect(() => {
         getDetailContent(props.match.params.id)
+
+        document.querySelector('#header-box').childNodes.forEach(item => {
+            item.addEventListener('click', e => {
+                if(e.target.classList.contains('fa-liked')){
+                    likeUnlikeArticle(e.target.id, !e.target.classList.contains('fa-liked'))
+                    e.target.classList.remove('fa-liked')
+                }else{
+                    likeUnlikeArticle(e.target.id, !e.target.classList.contains('fa-liked'))
+                    e.target.classList.add('fa-liked')
+                }
+            })
+        })
     }, [props])
 
     return (
@@ -55,14 +101,12 @@ function Article(props) {
                                 </div>
                                 <hr/>
                                 <div className="d-flex justify-content-center align-items-center flex-column" id="header-box">
-                                    <i className="fa fa-share-alt fa-2x"/>
-                                    <i className="fa fa-heart fa-2x my-3"/>
-                                    <i className="fa fa-share-alt fa-2x"/>
+                                    <i className={`fa fa-heart fa-2x my-3 ${liked && 'fa-liked'}`} id="like-btn"/>
+                                    <i className="fa fa-bookmark fa-2x" id="bookmark-btn"/>
                                 </div>
                                 <hr/>
                                 <div className="d-flex justify-content-center align-items-center flex-column" id="header-box">
                                     <i className="fa fa-share-alt fa-2x"/>
-                                    <i className="fa fa-heart fa-2x my-3"/>
                                 </div>
                             </div>
                         </div>

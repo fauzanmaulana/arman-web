@@ -46,9 +46,14 @@ function Header({source, setSource, isLoading, type}) {
                         <div className="col-lg-8 d-flex justify-content-between">
                             <h3 className="wow fadeInUp text-white" data-wow-duration="1s" data-wow-delay=".1s">{source.source || 'loading..'}</h3>
                             {!isLoading ? 
+                                // <>
+                                //     {source.has_interest === 1 ? 
+                                //     <button className="btn btn-sm btn-success px-3 py-2" onClick={() => unfollowSource(type)}>unfollow</button> : 
+                                //     <button className="btn btn-sm btn-outline-success px-3 py-2" onClick={() => followSource(type)}>follow</button> }
+                                // </>
                                 <>
                                     {source.has_interest === 1 ? 
-                                    <button className="btn btn-sm btn-success px-3 py-2" onClick={() => unfollowSource(type)}>unfollow</button> : 
+                                    <button className="btn btn-sm btn-success px-3 py-2" disabled={true} >followed</button> : 
                                     <button className="btn btn-sm btn-outline-success px-3 py-2" onClick={() => followSource(type)}>follow</button> }
                                 </>
                                 :

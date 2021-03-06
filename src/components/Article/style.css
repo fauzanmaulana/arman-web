@@ -11,3 +11,13 @@ body{
     padding: 20px;
     box-sizing: border-box;
 }
+
+.fa-share-alt, .fa-heart{
+    color: transparent;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #00D363;
+}
+
+.fa-liked{
+    color:#00D363;
+}
