@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {withRouter} from 'react-router-dom'
 import Header from './Header'
-import ContentList from '../Common/Content/List'
-import Skeleton from 'react-loading-skeleton'
+import InfiniteContent from '../Common/InfiniteContent/List'
 
 function Source(props) {
 
@@ -13,39 +12,26 @@ function Source(props) {
         source_logo:'',
         has_interest: ''
     })
-    const [content, setContent] = useState([])
 
-    const getDetailSource = async id => {
-        setIsLoading(true)
-        const response = await fetch(`${window.baseUrl}/api/contents?source_id=${id}`,{
-            headers: new Headers({
-                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-            })
-        })
-        const result = await response.json()
-        getSource(result.data[0], id)
-        setContent(result.data)
-        setIsLoading(false)
-    }
-
-    const getSource = async (source, id) => {
+    const getSource = async (id) => {
         const response = await fetch(`${window.baseUrl}/api/contents/explore`,{
             headers: new Headers({
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             })
         })
         const result = await response.json()
-        const hasInterest = result.data.sources.filter(data => data.name === source.source)
+        const sources = result.data.sources.filter(data => data.id == id)[0]
         setSource({
             id: id,
-            source: source.source,
-            source_logo: source.source_logo,
-            has_interest: hasInterest[0].has_interest
+            source: sources.name,
+            source_logo: sources.logo,
+            has_interest: sources.has_interest
         })
+        setIsLoading(false)
     }
 
     useEffect(() => {
-        getDetailSource(props.match.params.id)
+        getSource(props.match.params.id)
     }, [props])
 
     return (
@@ -54,16 +40,7 @@ function Source(props) {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-9">
-                        {!isLoading ? 
-                            <ContentList item={content} />
-                            :
-                            <div className="mt-2">
-                                <Skeleton width={630} height={200} className="mb-2" />
-                                <Skeleton width={630} height={200} className="mb-2" />
-                                <Skeleton width={630} height={200} className="mb-2" />
-                                <Skeleton width={630} height={200} className="mb-2" />
-                            </div>
-                        }
+                        <InfiniteContent endpoint={`api/contents?source_id=${props.match.params.id}`} />
                     </div>
                 </div>
             </div>

@@ -1,7 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
-
-// component
 import Jumbotron from './Jumbotron/index'
 import Explore from './Explore'
 

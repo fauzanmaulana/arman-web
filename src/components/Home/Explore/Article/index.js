@@ -32,7 +32,7 @@ function Article(props) {
             <div className="row">
                 <>
                     <div className="col-lg-8">
-                        <InfiniteContent />
+                        <InfiniteContent endpoint="api/contents" />
                     </div>
                     <div className="col-lg-4" id="sidelist-wrapper">
                         <div className="sticky-top sidelist mb-5">

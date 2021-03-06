@@ -32,7 +32,7 @@ function Search(props) {
 
     return (
         <div>
-            <Title title={`Result for ${props.location.state.keyword}`} />
+            <Title title={hasMoreItems ? 'loading..' : `Result for ${props.location.state.keyword}`} />
 
             <div className="container">
                 <div className="row mt-5">

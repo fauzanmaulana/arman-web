@@ -12,7 +12,7 @@ function Item({data}) {
                             <Source data={item}/>
 
                             {/* title */}
-                            <p>{item.title}</p>
+                            <p dangerouslySetInnerHTML={{ __html: item.title }} />
 
                             {/* timestamp */}
                             <div className="footer-trending-card">

@@ -5,11 +5,11 @@ import {Link} from 'react-router-dom'
 function Item({item}) {
     return (
         <div className="related-article">
-            <img src={item.content_image} className="img-fluid" alt="article"/>
+            <img src={item.thumbnail} className="img-fluid" alt="article"/>
             <Link to={`/article/${item.id}`}>
-                <h3 className="my-3">{item.title}</h3>
+                <h3 className="my-3" dangerouslySetInnerHTML={{ __html: item.title }} />
             </Link>
-            <p>{item.content.substr(0, 100)}..</p>
+            <div dangerouslySetInnerHTML={{ __html: item.description }} />
             <div className="row">
                 <div className="col">
                     <Source data={item}/>

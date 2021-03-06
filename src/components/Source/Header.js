@@ -39,7 +39,7 @@ function Header({source, setSource, isLoading, type}) {
     }
 
     return (
-        <div id="home" className="slider_area">
+        <div id="home" className="slider_area mb-4">
             <div className="single_slider_two d-flex align-items-center slider_bg_1">
                 <div className="container">
                     <div className="row mt-5">
