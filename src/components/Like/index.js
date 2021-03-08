@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Title from '../Common/Title'
-import ContentList from '../Common/Content/List'
-import LikeDummyData from '../../data/Dummy/index'
+import InfiniteContent from '../Common/InfiniteContent/List'
 
 function Like() {
 
-    const [like, setLike] = useState([])
-
-    useEffect(() => {
-        setLike(LikeDummyData)
-    }, [])
-
     return (
         <div>
-            <Title title={'Like'} />
+            <Title title={'Liked Article'} />
             <div className="container">
-                <div className="row">
+                <div className="row mt-5">
                     <div className="col-lg-9">
-                        <ContentList item={like} />
+                        <InfiniteContent endpoint="api/contents/likes" />
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ function Topics({sources, topics}) {
 
     return (
         <div className="wow fadeIn">
-            <Source item={sources} />
+            <Source item={sources} isContent={false} />
             <Topic item={topics} />
         </div>
     )

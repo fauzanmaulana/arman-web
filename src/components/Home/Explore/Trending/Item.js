@@ -9,7 +9,7 @@ function Item({data}) {
                     {i < 6 && 
                         <div className="p-3 mb-3" id="trending-card" key={i}>
                             {/* profile image and from */}
-                            <Source data={item}/>
+                            <Source data={item} isContent={true}/>
 
                             {/* title */}
                             <p dangerouslySetInnerHTML={{ __html: item.title }} />

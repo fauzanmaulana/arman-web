@@ -6,7 +6,7 @@ import './style.css'
 
 function Explore() {
 
-    const bookmark = useContext(BookmarkContext)
+    const {bookmark} = useContext(BookmarkContext)
 
     return (
         <div>

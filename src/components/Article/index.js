@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {withRouter} from 'react-router-dom'
 import ArticleData from '../../data/Dummy/index'
 import Title from '../Common/Title'
@@ -7,9 +7,12 @@ import Related from './Related/List'
 import NoThumbnail from '../../image/no_thumbnail.jpeg'
 import BookmarkOutline from '../../image/bookmark-outline.svg'
 import BookmarkBold from '../../image/bookmark-bold.svg'
+import { BookmarkContext } from '../../context/BookmarkContext'
 import './style.css'
 
 function Article(props) {
+
+    const {setBookmark, setBookmarkUpdate} = useContext(BookmarkContext)
     
     const [articles, setArticles] = useState({
         id: '',
@@ -20,9 +23,11 @@ function Article(props) {
         related_articles: [],
         liked: '',
         origin_url: '',
-        content_date: ''
+        content_date: '',
+        bookmarked: ''
     })
     const [liked, setLiked] = useState(false)
+    const [bookmarked, setBookmarked] = useState(false)
 
     const getDetailContent = async (id) => {
         const response = await fetch(`${window.baseUrl}/api/contents/${id}`,{
@@ -34,13 +39,14 @@ function Article(props) {
         console.log(result)
         setArticles(result.data)
         setLiked(result.data.liked)
+        setBookmarked(result.data.bookmarked)
     }
 
     const likeUnlikeArticle = async (id, bool) => {
         switch (id) {
             case 'like-btn':
+                setLiked(bool)
                 if(bool){
-                    setLiked(bool)
                     const response = await fetch(`${window.baseUrl}/api/contents/${props.match.params.id}/like`, {
                         method: 'post',
                         headers: new Headers({
@@ -50,7 +56,6 @@ function Article(props) {
                     const result = await response.json()
                     console.log(result)
                 }else{
-                    setLiked(bool)
                     const response = await fetch(`${window.baseUrl}/api/contents/${props.match.params.id}/unlike`, {
                         method: 'post',
                         headers: new Headers({
@@ -63,7 +68,26 @@ function Article(props) {
                 break;
         
             case 'bookmark-btn':
-                console.log('bookmark code!')
+                setBookmarked(bool)
+                if(bool){
+                    const response = await fetch(`${window.baseUrl}/api/contents/${props.match.params.id}/bookmark`, {
+                        method: 'post',
+                        headers: new Headers({
+                            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                        })
+                    })
+                    const result = await response.json()
+                    console.log(result)
+                }else{
+                    const response = await fetch(`${window.baseUrl}/api/contents/${props.match.params.id}/unbookmark`, {
+                        method: 'post',
+                        headers: new Headers({
+                            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                        })
+                    })
+                    const result = await response.json()
+                    console.log(result)
+                }
                 break;
         }
     }
@@ -101,8 +125,8 @@ function Article(props) {
                                 </div>
                                 <hr/>
                                 <div className="d-flex justify-content-center align-items-center flex-column" id="header-box">
-                                    <i className={`fa fa-heart fa-2x my-3 ${liked && 'fa-liked'}`} id="like-btn"/>
-                                    <i className="fa fa-bookmark fa-2x" id="bookmark-btn"/>
+                                    <i className={`fa fa-heart fa-2x my-3 ${liked ? 'fa-liked' : ''}`} id="like-btn"/>
+                                    <img src={bookmarked ? BookmarkBold : BookmarkOutline} className={bookmarked ? 'fa-liked' : ''} width="35" id="bookmark-btn"/>
                                 </div>
                                 <hr/>
                                 <div className="d-flex justify-content-center align-items-center flex-column" id="header-box">

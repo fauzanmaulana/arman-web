@@ -1,19 +1,16 @@
 import React, {useContext} from 'react'
-import { BookmarkContext } from '../../context/BookmarkContext'
 import Title from '../Common/Title'
-import ContentList from '../Common/Content/List'
+import InfiniteContent from '../Common/InfiniteContent/List'
 
 function Bookmark() {
 
-    const bookmark = useContext(BookmarkContext)
-
     return (
         <div>
-            <Title title={'Bookmark'} />
+            <Title title={'Bookmarked Article'} />
             <div className="container">
-                <div className="row">
+                <div className="row mt-5">
                     <div className="col-lg-9">
-                        <ContentList item={bookmark} />
+                        <InfiniteContent endpoint="api/contents/bookmarks" />
                     </div>
                 </div>
             </div>

@@ -19,7 +19,6 @@ function Item({data}) {
                                 <p className="mb-0"><span>{new Date(item.content_date).toLocaleDateString('en-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
                                 <p className="mb-0 wow">
                                     {/* <i className="fa fa-bookmark fa-2x" id={item.id} onClick={e => toogleBookmark(e)} /> */}
-                                    icon
                                 </p>
                             </div>
                         </div>

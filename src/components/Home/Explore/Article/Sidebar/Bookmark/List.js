@@ -11,7 +11,7 @@ function List({item}) {
                             <Source data={bookmark} />
                             <p className="mb-0" style={{fontSize:'11pt'}}>{bookmark.title.substr(0, 30)}..</p>
                             <div className="footer-trending-card">
-                                <p className="mb-0" style={{fontSize:'9pt'}}><span>{bookmark.writed_at}</span> . 3 min read</p>
+                                <p className="mb-0" style={{fontSize:'9pt'}}><span>{new Date(bookmark.content_date).toLocaleDateString('en-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></p>
                             </div>
                         </div>
                     }

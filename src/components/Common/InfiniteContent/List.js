@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Item from './Item'
 import {LoadingList} from '../../Common/Loading'
+import { data } from 'jquery'
 
 
 function List({endpoint}) {
@@ -21,13 +22,18 @@ function List({endpoint}) {
             })
         })
         const result = await response.json()
+
+        const uniqueArray = Array.from(new Set(result.data.map(item => item.id))).map(id => {
+            return result.data.find(item => item.id === id)
+        })
+
         if(result.success){
             if(page > 1){
                 setContent(current => {
-                    return([...current, ...result.data])
+                    return([...current, ...uniqueArray])
                 })
             }else{
-                setContent(result.data)
+                setContent(uniqueArray)
             }
             setMoreItems(false)
         }

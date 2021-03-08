@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Title from '../Common/Title'
-import ContentList from '../Common/Content/List'
-import HistoryDummyData from '../../data/Dummy/index'
+import InfiniteContent from '../Common/InfiniteContent/List'
 
 function History() {
-
-    const [history, setHistory] = useState([])
-
-    useEffect(() => {
-        setHistory(HistoryDummyData)
-    }, [])
 
     return (
         <div>
             <Title title={'History'} />
             <div className="container">
-                <div className="row">
+                <div className="row mt-5">
                     <div className="col-lg-9">
-                        <ContentList item={history} />
+                        <InfiniteContent endpoint="api/contents/histories" />
                     </div>
                 </div>
             </div>
