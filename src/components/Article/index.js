@@ -28,6 +28,7 @@ function Article(props) {
     })
     const [liked, setLiked] = useState(false)
     const [bookmarked, setBookmarked] = useState(false)
+    const [hasFollow, setHasFollow]= useState(false)
 
     const getDetailContent = async (id) => {
         const response = await fetch(`${window.baseUrl}/api/contents/${id}`,{
@@ -40,6 +41,7 @@ function Article(props) {
         setArticles(result.data)
         setLiked(result.data.liked)
         setBookmarked(result.data.bookmarked)
+        return result.data.source
     }
 
     const likeUnlikeArticle = async (id, bool) => {
@@ -92,8 +94,34 @@ function Article(props) {
         }
     }
 
+    const searchSource = async (source) => {
+        const response = await fetch(`${window.baseUrl}/api/contents/explore`,{
+            headers: new Headers({
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            })
+        })
+        const result = await response.json()
+        const data =  result.data.sources.filter(data => data.name == source)[0]
+        setHasFollow(data.has_interest)
+        return data
+    }
+
+    const followSource = async (type, source_id) => {
+        const source = await searchSource(source_id)
+        const response = await fetch(`${window.baseUrl}/api/${type}/${source.id}/follow`, {
+            method:'post',
+            headers: new Headers({
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            })
+        })
+        const result = await response.json()
+        console.log(result)
+    }
+
     useEffect(() => {
-        getDetailContent(props.match.params.id)
+        getDetailContent(props.match.params.id).then((source) => {
+            searchSource(source)
+        })
 
         document.querySelector('#header-box').childNodes.forEach(item => {
             item.addEventListener('click', e => {
@@ -119,9 +147,15 @@ function Article(props) {
                             <div className="sticky-top mb-5" id="sidemenu">
                                 <div className="px-4 text-center">
                                     <Source data={articles}/>
-                                    <button className="btn btn-sm btn-block btn-outline-primary">
-                                        follow
-                                    </button>
+                                    {hasFollow ? 
+                                        <button className="btn btn-sm btn-block btn-outline-primary" onClick={() => followSource('sources', articles.source)}>
+                                            follow
+                                        </button>
+                                        :
+                                        <button className="btn btn-sm btn-block btn-success" disabled={true}>
+                                            followed
+                                        </button>
+                                    }
                                 </div>
                                 <hr/>
                                 <div className="d-flex justify-content-center align-items-center flex-column" id="header-box">
@@ -129,13 +163,10 @@ function Article(props) {
                                     <img src={bookmarked ? BookmarkBold : BookmarkOutline} className={bookmarked ? 'fa-liked' : ''} width="35" id="bookmark-btn"/>
                                 </div>
                                 <hr/>
-                                <div className="d-flex justify-content-center align-items-center flex-column" id="header-box">
-                                    <i className="fa fa-share-alt fa-2x"/>
-                                </div>
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <h1>{articles.title}</h1>
+                            <h1 dangerouslySetInnerHTML={{ __html: articles.title }} />
                             <img src={articles.thumbnail || NoThumbnail} className="img-fluid mt-3 mb-4" alt="article"/>
                             <div dangerouslySetInnerHTML={{ __html: articles.content }} />
                             

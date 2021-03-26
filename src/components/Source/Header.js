@@ -2,8 +2,6 @@ import React from 'react'
 
 function Header({source, setSource, isLoading, type}) {
 
-    console.log(source)
-
     const followSource = async type => {
         const response = await fetch(`${window.baseUrl}/api/${type}/${source.id}/follow`, {
             method:'post',

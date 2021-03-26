@@ -26,13 +26,13 @@ function Header(props) {
 
     const oauthAuthorization = async (type, email, token) => {
         const params = {
-            'grant_type': 'social',
-            'client_id': '3',
-            'client_secret': 'dSXefk8cq1fnfvptkpnLQtVQF5B3Zo711Mefmg67',
-            'provider': type,
-            'email': email,
-            'access_token': token,
-            'platform': 'Android'
+            "grant_type": "social",
+            "client_id": "3",
+            "client_secret": "dSXefk8cq1fnfvptkpnLQtVQF5B3Zo711Mefmg67",
+            "provider": type,
+            "email": email,
+            "access_token": token,
+            "platform": "Android"
         }
         const response = await fetch(`${window.baseUrl}/oauth/token`, {
             method: 'post',
@@ -45,7 +45,7 @@ function Header(props) {
     const oauthLogin = async (type) => {
         let provider;
         switch (type) {
-            case 'goggle':
+            case 'google':
                 provider = new firebase.auth.GoogleAuthProvider()
                 break;
 

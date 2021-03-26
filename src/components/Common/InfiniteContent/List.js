@@ -22,6 +22,7 @@ function List({endpoint}) {
             })
         })
         const result = await response.json()
+        console.log(result)
 
         const uniqueArray = Array.from(new Set(result.data.map(item => item.id))).map(id => {
             return result.data.find(item => item.id === id)
