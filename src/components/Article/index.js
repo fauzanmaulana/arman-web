@@ -161,7 +161,7 @@ function Article(props) {
                                             }
                                         </>
                                         :
-                                        <button className="btn btn-sm btn-block btn-success" disabled={true}>
+                                        <button className="btn btn-sm btn-block btn-primary" disabled={true}>
                                             loading...
                                         </button>
                                     }
