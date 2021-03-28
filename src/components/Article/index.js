@@ -106,7 +106,9 @@ function Article(props) {
         return data
     }
 
-    const followSource = async (type, source_id) => {
+    const followSource = async (e, type, source_id) => {
+        e.target.textContent = 'loading..'
+        e.target.disabled = true
         const source = await searchSource(source_id)
         const response = await fetch(`${window.baseUrl}/api/${type}/${source.id}/follow`, {
             method:'post',
@@ -116,6 +118,13 @@ function Article(props) {
         })
         const result = await response.json()
         console.log(result)
+        if(result.success){
+            setHasFollow(true)
+        }else{
+            setHasFollow('')
+            e.target.textContent = 'Follow'
+            e.target.disabled = false
+        }
     }
 
     useEffect(() => {
@@ -151,7 +160,7 @@ function Article(props) {
                                         hasFollow !== '' ?
                                         <>
                                             {!hasFollow ? 
-                                                <button className="btn btn-sm btn-block btn-outline-primary" onClick={() => followSource('sources', articles.source)}>
+                                                <button className="btn btn-sm btn-block btn-outline-primary" onClick={(e) => followSource(e, 'sources', articles.source)}>
                                                     follow
                                                 </button>
                                                 :
