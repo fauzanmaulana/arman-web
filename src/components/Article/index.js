@@ -28,7 +28,7 @@ function Article(props) {
     })
     const [liked, setLiked] = useState(false)
     const [bookmarked, setBookmarked] = useState(false)
-    const [hasFollow, setHasFollow]= useState(false)
+    const [hasFollow, setHasFollow]= useState('')
 
     const getDetailContent = async (id) => {
         const response = await fetch(`${window.baseUrl}/api/contents/${id}`,{
@@ -147,13 +147,22 @@ function Article(props) {
                             <div className="sticky-top mb-5" id="sidemenu">
                                 <div className="px-4 text-center">
                                     <Source data={articles}/>
-                                    {hasFollow ? 
-                                        <button className="btn btn-sm btn-block btn-outline-primary" onClick={() => followSource('sources', articles.source)}>
-                                            follow
-                                        </button>
+                                    {
+                                        hasFollow !== '' ?
+                                        <>
+                                            {!hasFollow ? 
+                                                <button className="btn btn-sm btn-block btn-outline-primary" onClick={() => followSource('sources', articles.source)}>
+                                                    follow
+                                                </button>
+                                                :
+                                                <button className="btn btn-sm btn-block btn-success" disabled={true}>
+                                                    followed
+                                                </button>
+                                            }
+                                        </>
                                         :
                                         <button className="btn btn-sm btn-block btn-success" disabled={true}>
-                                            followed
+                                            loading...
                                         </button>
                                     }
                                 </div>

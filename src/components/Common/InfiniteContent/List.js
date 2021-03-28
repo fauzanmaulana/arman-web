@@ -22,11 +22,12 @@ function List({endpoint}) {
             })
         })
         const result = await response.json()
-        console.log(result)
 
-        const uniqueArray = Array.from(new Set(result.data.map(item => item.id))).map(id => {
+        let uniqueArray = Array.from(new Set(result.data.map(item => item.id))).map(id => {
             return result.data.find(item => item.id === id)
         })
+        
+        uniqueArray = uniqueArray.filter(data => data.content_type == "Article")
 
         if(result.success){
             if(page > 1){
